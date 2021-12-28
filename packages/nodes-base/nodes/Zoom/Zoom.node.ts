@@ -21,10 +21,10 @@ import {
 	meetingOperations,
 } from './MeetingDescription';
 
-// import {
-// 	meetingRegistrantOperations,
-// 	meetingRegistrantFields,
-// } from './MeetingRegistrantDescription';
+import {
+	meetingRegistrantOperations,
+ 	meetingRegistrantFields,
+} from './MeetingRegistrantDescription';
 
 // import {
 // 	webinarOperations,
@@ -122,10 +122,10 @@ export class Zoom implements INodeType {
 						name: 'Meeting',
 						value: 'meeting',
 					},
-					// {
-					// 	name: 'Meeting Registrant',
-					// 	value: 'meetingRegistrant'
-					// },
+					{
+						name: 'Meeting Registrant',
+						value: 'meetingRegistrant'
+					},
 					// {
 					// 	name: 'Webinar',
 					// 	value: 'webinar'
@@ -138,9 +138,9 @@ export class Zoom implements INodeType {
 			...meetingOperations,
 			...meetingFields,
 
-			// 	//MEETING REGISTRANTS
-			// 	...meetingRegistrantOperations,
-			// 	...meetingRegistrantFields,
+				//MEETING REGISTRANTS
+				...meetingRegistrantOperations,
+				...meetingRegistrantFields,
 
 			// 	//WEBINARS
 			// 	...webinarOperations,
@@ -456,110 +456,112 @@ export class Zoom implements INodeType {
 
 					}
 				}
-				// if (resource === 'meetingRegistrant') {
-				// 	if (operation === 'create') {
-				// 		//https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrantcreate
-				// 		const meetingId = this.getNodeParameter('meetingId', i) as string;
-				// 		const emailId = this.getNodeParameter('email', i) as string;
-				// 		body.email = emailId;
-				// 		const firstName = this.getNodeParameter('firstName', i) as string;
-				// 		body.first_name = firstName;
-				// 		const additionalFields = this.getNodeParameter(
-				// 			'additionalFields',
-				// 			i
-				// 		) as IDataObject;
-				// 		if (additionalFields.occurrenceId) {
-				// 			qs.occurrence_ids = additionalFields.occurrenceId as string;
-				// 		}
-				// 		if (additionalFields.lastName) {
-				// 			body.last_name = additionalFields.lastName as string;
-				// 		}
-				// 		if (additionalFields.address) {
-				// 			body.address = additionalFields.address as string;
-				// 		}
-				// 		if (additionalFields.city) {
-				// 			body.city = additionalFields.city as string;
-				// 		}
-				// 		if (additionalFields.state) {
-				// 			body.state = additionalFields.state as string;
-				// 		}
-				// 		if (additionalFields.country) {
-				// 			body.country = additionalFields.country as string;
-				// 		}
-				// 		if (additionalFields.zip) {
-				// 			body.zip = additionalFields.zip as string;
-				// 		}
-				// 		if (additionalFields.phone) {
-				// 			body.phone = additionalFields.phone as string;
-				// 		}
-				// 		if (additionalFields.comments) {
-				// 			body.comments = additionalFields.comments as string;
-				// 		}
-				// 		if (additionalFields.org) {
-				// 			body.org = additionalFields.org as string;
-				// 		}
-				// 		if (additionalFields.jobTitle) {
-				// 			body.job_title = additionalFields.jobTitle as string;
-				// 		}
-				// 		if (additionalFields.purchasingTimeFrame) {
-				// 			body.purchasing_time_frame = additionalFields.purchasingTimeFrame as string;
-				// 		}
-				// 		if (additionalFields.roleInPurchaseProcess) {
-				// 			body.role_in_purchase_process = additionalFields.roleInPurchaseProcess as string;
-				// 		}
-				// 		responseData = await zoomApiRequest.call(
-				// 			this,
-				// 			'POST',
-				// 			`/meetings/${meetingId}/registrants`,
-				// 			body,
-				// 			qs
-				// 		);
-				// 	}
-				// 	if (operation === 'getAll') {
-				// 		//https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants
-				// 		const meetingId = this.getNodeParameter('meetingId', i) as string;
-				// 		const additionalFields = this.getNodeParameter(
-				// 			'additionalFields',
-				// 			i
-				// 		) as IDataObject;
-				// 		if (additionalFields.occurrenceId) {
-				// 			qs.occurrence_id = additionalFields.occurrenceId as string;
-				// 		}
-				// 		if (additionalFields.status) {
-				// 			qs.status = additionalFields.status as string;
-				// 		}
-				// 		const returnAll = this.getNodeParameter('returnAll', i) as boolean;
-				// 		if (returnAll) {
-				// 			responseData = await zoomApiRequestAllItems.call(this, 'results', 'GET', `/meetings/${meetingId}/registrants`, {}, qs);
-				// 		} else {
-				// 			qs.page_size = this.getNodeParameter('limit', i) as number;
-				// 			responseData = await zoomApiRequest.call(this, 'GET', `/meetings/${meetingId}/registrants`, {}, qs);
+				if (resource === 'meetingRegistrant') {
+					if (operation === 'create') {
+						//https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrantcreate
+						const body: IDataObject = {};
+						const meetingId = this.getNodeParameter('meetingId', i) as string;
+						const emailId = this.getNodeParameter('email', i) as string;
+						body.email = emailId;
+						const firstName = this.getNodeParameter('firstName', i) as string;
+						body.first_name = firstName;
+						const additionalFields = this.getNodeParameter(
+							'additionalFields',
+							i
+						) as IDataObject;
+						if (additionalFields.occurrenceId) {
+							qs.occurrence_ids = additionalFields.occurrenceId as string;
+						}
+						if (additionalFields.lastName) {
+							body.last_name = additionalFields.lastName as string;
+						}
+						if (additionalFields.address) {
+							body.address = additionalFields.address as string;
+						}
+						if (additionalFields.city) {
+							body.city = additionalFields.city as string;
+						}
+						if (additionalFields.state) {
+							body.state = additionalFields.state as string;
+						}
+						if (additionalFields.country) {
+							body.country = additionalFields.country as string;
+						}
+						if (additionalFields.zip) {
+							body.zip = additionalFields.zip as string;
+						}
+						if (additionalFields.phone) {
+							body.phone = additionalFields.phone as string;
+						}
+						if (additionalFields.comments) {
+							body.comments = additionalFields.comments as string;
+						}
+						if (additionalFields.org) {
+							body.org = additionalFields.org as string;
+						}
+						if (additionalFields.jobTitle) {
+							body.job_title = additionalFields.jobTitle as string;
+						}
+						if (additionalFields.purchasingTimeFrame) {
+							body.purchasing_time_frame = additionalFields.purchasingTimeFrame as string;
+						}
+						if (additionalFields.roleInPurchaseProcess) {
+							body.role_in_purchase_process = additionalFields.roleInPurchaseProcess as string;
+						}
+						responseData = await zoomApiRequest.call(
+							this,
+							'POST',
+							`/meetings/${meetingId}/registrants`,
+							body,
+							qs
+						);
+					}
+					if (operation === 'getAll') {
+						//https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants
+						const meetingId = this.getNodeParameter('meetingId', i) as string;
+						const additionalFields = this.getNodeParameter(
+							'additionalFields',
+							i
+						) as IDataObject;
+						if (additionalFields.occurrenceId) {
+							qs.occurrence_id = additionalFields.occurrenceId as string;
+						}
+						if (additionalFields.status) {
+							qs.status = additionalFields.status as string;
+						}
+						const returnAll = this.getNodeParameter('returnAll', i) as boolean;
+						if (returnAll) {
+							responseData = await zoomApiRequestAllItems.call(this, 'results', 'GET', `/meetings/${meetingId}/registrants`, {}, qs);
+						} else {
+							qs.page_size = this.getNodeParameter('limit', i) as number;
+							responseData = await zoomApiRequest.call(this, 'GET', `/meetings/${meetingId}/registrants`, {}, qs);
 
-				// 		}
+						}
 
-				// 	}
-				// 	if (operation === 'update') {
-				// 		//https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrantstatus
-				// 		const meetingId = this.getNodeParameter('meetingId', i) as string;
-				// 		const additionalFields = this.getNodeParameter(
-				// 			'additionalFields',
-				// 			i
-				// 		) as IDataObject;
-				// 		if (additionalFields.occurrenceId) {
-				// 			qs.occurrence_id = additionalFields.occurrenceId as string;
-				// 		}
-				// 		if (additionalFields.action) {
-				// 			body.action = additionalFields.action as string;
-				// 		}
-				// 		responseData = await zoomApiRequest.call(
-				// 			this,
-				// 			'PUT',
-				// 			`/meetings/${meetingId}/registrants/status`,
-				// 			body,
-				// 			qs
-				// 		);
-				// 	}
-				// }
+					}
+					if (operation === 'update') {
+						//https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrantstatus
+						const meetingId = this.getNodeParameter('meetingId', i) as string;
+						const body: IDataObject = {};
+						const additionalFields = this.getNodeParameter(
+							'additionalFields',
+							i
+						) as IDataObject;
+						if (additionalFields.occurrenceId) {
+							qs.occurrence_id = additionalFields.occurrenceId as string;
+						}
+						if (additionalFields.action) {
+							body.action = additionalFields.action as string;
+						}
+						responseData = await zoomApiRequest.call(
+							this,
+							'PUT',
+							`/meetings/${meetingId}/registrants/status`,
+							body,
+							qs
+						);
+					}
+				}
 				// if (resource === 'webinar') {
 				// 	if (operation === 'create') {
 				// 		//https://marketplace.zoom.us/docs/api-reference/zoom-api/webinars/webinarcreate
